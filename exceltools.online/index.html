@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Tools Online - Free Excel Utilities & Converters</title>
+    <meta name="description" content="Free online Excel tools including CSV converter, data formatter, formula generator, and more. Boost your productivity with our comprehensive Excel utilities.">
+    <meta name="keywords" content="excel tools, csv converter, excel formatter, spreadsheet tools, online excel utilities">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h1>ExcelTools<span class="logo-accent">.online</span></h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#tools" class="nav-link">Tools</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Powerful Excel Tools at Your Fingertips</h1>
+                <p class="hero-subtitle">Free online utilities to convert, format, and analyze your Excel data. No downloads required - everything works directly in your browser.</p>
+                <div class="hero-cta">
+                    <a href="#tools" class="btn btn-primary">Explore Tools</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-graphic">
+                    <div class="spreadsheet-visual">
+                        <div class="cell active"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Excel Tools Collection</h2>
+                <p>Choose from our comprehensive suite of Excel utilities</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="openTool('csv-converter')">
+                    <div class="tool-icon">📊</div>
+                    <h3>CSV Converter</h3>
+                    <p>Convert Excel files to CSV format and vice versa. Preserve data integrity during conversion.</p>
+                    <div class="tool-tag">Converter</div>
+                </div>
+                <div class="tool-card" onclick="openTool('data-formatter')">
+                    <div class="tool-icon">🎨</div>
+                    <h3>Data Formatter</h3>
+                    <p>Format and clean your data with various formatting options and validation rules.</p>
+                    <div class="tool-tag">Formatter</div>
+                </div>
+                <div class="tool-card" onclick="openTool('formula-generator')">
+                    <div class="tool-icon">⚡</div>
+                    <h3>Formula Generator</h3>
+                    <p>Generate complex Excel formulas with an intuitive interface. No formula knowledge required.</p>
+                    <div class="tool-tag">Generator</div>
+                </div>
+                <div class="tool-card" onclick="openTool('data-analyzer')">
+                    <div class="tool-icon">📈</div>
+                    <h3>Data Analyzer</h3>
+                    <p>Analyze your data with statistical functions, charts, and insights generation.</p>
+                    <div class="tool-tag">Analyzer</div>
+                </div>
+                <div class="tool-card" onclick="openTool('duplicate-remover')">
+                    <div class="tool-icon">🧹</div>
+                    <h3>Duplicate Remover</h3>
+                    <p>Identify and remove duplicate rows from your spreadsheets quickly and efficiently.</p>
+                    <div class="tool-tag">Cleaner</div>
+                </div>
+                <div class="tool-card" onclick="openTool('merge-tool')">
+                    <div class="tool-icon">🔗</div>
+                    <h3>Merge Tool</h3>
+                    <p>Merge multiple Excel files or worksheets into a single consolidated document.</p>
+                    <div class="tool-tag">Merger</div>
+                </div>
+                <div class="tool-card" onclick="window.location.href='date-converter.html'">
+                    <div class="tool-icon">📅</div>
+                    <h3>Date Converter</h3>
+                    <p>Convert between Excel date serial numbers and human-readable dates with real-time conversion.</p>
+                    <div class="tool-tag">Converter</div>
+                </div>
+                <div class="tool-card" onclick="window.location.href='formula-translator.html'">
+                    <div class="tool-icon">🌐</div>
+                    <h3>Formula Translator</h3>
+                    <p>Translate Excel formulas between different languages and regional settings for international compatibility.</p>
+                    <div class="tool-tag">Translator</div>
+                </div>
+                <div class="tool-card" onclick="window.location.href='column-converter.html'">
+                    <div class="tool-icon">🔤</div>
+                    <h3>Column Converter</h3>
+                    <p>Convert between Excel column letters (A, B, AA) and column numbers with real-time conversion.</p>
+                    <div class="tool-tag">Converter</div>
+                </div>
+                <div class="tool-card" onclick="window.location.href='range-converter.html'">
+                    <div class="tool-icon">📋</div>
+                    <h3>Range Converter</h3>
+                    <p>Convert Excel ranges (A1:C3) to comma-separated cell lists with validation and counting.</p>
+                    <div class="tool-tag">Converter</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose ExcelTools.online?</h2>
+                <p>Built for professionals who value efficiency and reliability</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process your data instantly with our optimized algorithms. No waiting, no delays.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Secure</h3>
+                    <p>Your data never leaves your browser. All processing happens locally on your device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>No Installation</h3>
+                    <p>Works directly in your browser. Compatible with all devices and operating systems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3>Completely Free</h3>
+                    <p>All tools are free to use with no hidden charges or subscription requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Modal -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tool Name</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Tool content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ExcelTools.online</h3>
+                    <p>Your go-to platform for Excel productivity tools. Making data management simple and efficient.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="#tools">CSV Converter</a></li>
+                        <li><a href="#tools">Data Formatter</a></li>
+                        <li><a href="#tools">Formula Generator</a></li>
+                        <li><a href="#tools">Data Analyzer</a></li>
+                        <li><a href="date-converter.html">Date Converter</a></li>
+                        <li><a href="formula-translator.html">Formula Translator</a></li>
+                        <li><a href="column-converter.html">Column Converter</a></li>
+                        <li><a href="range-converter.html">Range Converter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="contact.html">Report a Bug</a></li>
+                        <li><a href="contact.html">Feature Request</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ExcelTools.online. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
