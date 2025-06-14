@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Formula Translator - Excel Tools Online</title>
+    <meta name="description" content="Translate Excel formulas between different languages. Convert function names and separators for international Excel compatibility.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">ExcelTools<span class="logo-accent">.online</span></a></h1>
+                </div>
+                <nav class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#tools" class="nav-link">Tools</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>🌐 Excel Formula Translator</h1>
+                <p>Translate Excel formulas between different languages and regional settings</p>
+            </div>
+
+            <div class="translator-container">
+                <div class="translator-card">
+                    <!-- Language Selection -->
+                    <div class="language-selection">
+                        <h3>🔄 Translation Settings</h3>
+                        <div class="language-controls">
+                            <div class="language-group">
+                                <label for="sourceLanguage">From Language:</label>
+                                <select id="sourceLanguage">
+                                    <option value="en">English (EN)</option>
+                                    <option value="de">German (DE)</option>
+                                    <option value="fr">French (FR)</option>
+                                    <option value="es">Spanish (ES)</option>
+                                    <option value="it">Italian (IT)</option>
+                                    <option value="pt">Portuguese (PT)</option>
+                                    <option value="nl">Dutch (NL)</option>
+                                    <option value="sv">Swedish (SV)</option>
+                                    <option value="da">Danish (DA)</option>
+                                    <option value="no">Norwegian (NO)</option>
+                                    <option value="fi">Finnish (FI)</option>
+                                    <option value="pl">Polish (PL)</option>
+                                    <option value="ru">Russian (RU)</option>
+                                    <option value="ja">Japanese (JA)</option>
+                                    <option value="ko">Korean (KO)</option>
+                                    <option value="zh">Chinese (ZH)</option>
+                                </select>
+                            </div>
+
+                            <button class="swap-languages-btn" onclick="swapLanguages()" title="Swap Languages">
+                                ⇄
+                            </button>
+
+                            <div class="language-group">
+                                <label for="targetLanguage">To Language:</label>
+                                <select id="targetLanguage">
+                                    <option value="en">English (EN)</option>
+                                    <option value="de" selected>German (DE)</option>
+                                    <option value="fr">French (FR)</option>
+                                    <option value="es">Spanish (ES)</option>
+                                    <option value="it">Italian (IT)</option>
+                                    <option value="pt">Portuguese (PT)</option>
+                                    <option value="nl">Dutch (NL)</option>
+                                    <option value="sv">Swedish (SV)</option>
+                                    <option value="da">Danish (DA)</option>
+                                    <option value="no">Norwegian (NO)</option>
+                                    <option value="fi">Finnish (FI)</option>
+                                    <option value="pl">Polish (PL)</option>
+                                    <option value="ru">Russian (RU)</option>
+                                    <option value="ja">Japanese (JA)</option>
+                                    <option value="ko">Korean (KO)</option>
+                                    <option value="zh">Chinese (ZH)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Interface -->
+                    <div class="translation-interface">
+                        <div class="formula-input-section">
+                            <div class="input-group">
+                                <label for="sourceFormula">📝 Source Formula</label>
+                                <textarea 
+                                    id="sourceFormula" 
+                                    placeholder="Enter your Excel formula here (e.g., =SUM(A1:A10))"
+                                    rows="4"
+                                ></textarea>
+                                <div class="input-help">
+                                    <small>Enter a complete Excel formula starting with =</small>
+                                </div>
+                                <div class="error-message" id="sourceError" style="display: none;"></div>
+                            </div>
+
+                            <div class="translate-controls">
+                                <button class="btn btn-primary translate-btn" onclick="translateFormula()">
+                                    🔄 Translate Formula
+                                </button>
+                                <button class="btn btn-secondary clear-btn" onclick="clearFormulas()">
+                                    🗑️ Clear All
+                                </button>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="targetFormula">🎯 Translated Formula</label>
+                                <textarea 
+                                    id="targetFormula" 
+                                    placeholder="Translated formula will appear here..."
+                                    rows="4"
+                                    readonly
+                                ></textarea>
+                                <div class="input-help">
+                                    <small>The translated formula with localized function names</small>
+                                </div>
+                                <div class="success-message" id="translationSuccess" style="display: none;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Translation Results -->
+                        <div class="translation-results" id="translationResults" style="display: none;">
+                            <h4>📊 Translation Details</h4>
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-label">Functions Translated:</span>
+                                    <span class="result-value" id="functionsCount">0</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Separator Changed:</span>
+                                    <span class="result-value" id="separatorChanged">No</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Decimal Separator:</span>
+                                    <span class="result-value" id="decimalSeparator">.</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">List Separator:</span>
+                                    <span class="result-value" id="listSeparator">,</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary copy-result-btn" onclick="copyTranslatedFormula()">
+                                📋 Copy Translated Formula
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Examples -->
+                    <div class="examples-section">
+                        <h4>💡 Quick Examples</h4>
+                        <div class="examples-grid">
+                            <div class="example-card" onclick='loadExample("=SUM(A1:A10)")'>
+                                <strong>Basic Sum:</strong>
+                                <code>=SUM(A1:A10)</code>
+                                <small>Simple range sum</small>
+                            </div>
+                            <div class="example-card" onclick='loadExample("=IF(A1>10,\"High\",\"Low\")")'>
+                                <strong>IF Statement:</strong>
+                                <code>=IF(A1>10,"High","Low")</code>
+                                <small>Conditional logic</small>
+                            </div>
+                            <div class="example-card" onclick='loadExample("=VLOOKUP(A1,B:D,2,FALSE)")'>
+                                <strong>VLOOKUP:</strong>
+                                <code>=VLOOKUP(A1,B:D,2,FALSE)</code>
+                                <small>Table lookup</small>
+                            </div>
+                            <div class="example-card" onclick='loadExample("=SUMIF(A:A,\">100\",B:B)")'>
+                                <strong>SUMIF:</strong>
+                                <code>=SUMIF(A:A,">100",B:B)</code>
+                                <small>Conditional sum</small>
+                            </div>
+                            <div class="example-card" onclick='loadExample("=INDEX(MATCH(A1,B:B,0),C:C)")'>
+                                <strong>INDEX-MATCH:</strong>
+                                <code>=INDEX(MATCH(A1,B:B,0),C:C)</code>
+                                <small>Advanced lookup</small>
+                            </div>
+                            <div class="example-card" onclick='loadExample("=CONCATENATE(A1,\" \",B1)")'>
+                                <strong>Text Join:</strong>
+                                <code>=CONCATENATE(A1," ",B1)</code>
+                                <small>Combine text</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Information Section -->
+                    <div class="info-section">
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4>ℹ️ About Formula Translation</h4>
+                                <ul>
+                                    <li><strong>Function Names:</strong> Excel uses different function names in different languages</li>
+                                    <li><strong>Separators:</strong> List and decimal separators vary by region</li>
+                                    <li><strong>Compatibility:</strong> Ensures formulas work across international Excel versions</li>
+                                    <li><strong>Accuracy:</strong> Maintains formula logic while adapting syntax</li>
+                                </ul>
+                            </div>
+
+                            <div class="info-card">
+                                <h4>🔧 Supported Features</h4>
+                                <ul>
+                                    <li>200+ Excel functions across 16 languages</li>
+                                    <li>Automatic separator adjustment</li>
+                                    <li>Nested formula support</li>
+                                    <li>String literal preservation</li>
+                                    <li>Error detection and validation</li>
+                                    <li>Real-time syntax checking</li>
+                                </ul>
+                            </div>
+
+                            <div class="info-card">
+                                <h4>🌍 Language Support</h4>
+                                <div class="language-list">
+                                    <span class="language-tag">English</span>
+                                    <span class="language-tag">German</span>
+                                    <span class="language-tag">French</span>
+                                    <span class="language-tag">Spanish</span>
+                                    <span class="language-tag">Italian</span>
+                                    <span class="language-tag">Portuguese</span>
+                                    <span class="language-tag">Dutch</span>
+                                    <span class="language-tag">Swedish</span>
+                                    <span class="language-tag">Danish</span>
+                                    <span class="language-tag">Norwegian</span>
+                                    <span class="language-tag">Finnish</span>
+                                    <span class="language-tag">Polish</span>
+                                    <span class="language-tag">Russian</span>
+                                    <span class="language-tag">Japanese</span>
+                                    <span class="language-tag">Korean</span>
+                                    <span class="language-tag">Chinese</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ExcelTools.online</h3>
+                    <p>Your go-to platform for Excel productivity tools. Making data management simple and efficient.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="index.html#tools">CSV Converter</a></li>
+                        <li><a href="index.html#tools">Data Formatter</a></li>
+                        <li><a href="index.html#tools">Formula Generator</a></li>
+                        <li><a href="index.html#tools">Data Analyzer</a></li>
+                        <li><a href="date-converter.html">Date Converter</a></li>
+                        <li><a href="formula-translator.html">Formula Translator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="contact.html">Report a Bug</a></li>
+                        <li><a href="contact.html">Feature Request</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ExcelTools.online. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/formula-translator.js"></script>
+    <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            navMenu.classList.toggle('mobile-active');
+            mobileMenuBtn.classList.toggle('active');
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const isScrolled = window.scrollY > 10;
+            
+            header.style.background = isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'white';
+            header.style.backdropFilter = isScrolled ? 'blur(10px)' : 'none';
+        });
+    </script>
+
+    <style>
+        .page-content {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-neutral-50) 100%);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: var(--color-neutral-800);
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: var(--font-size-lg);
+            color: var(--color-neutral-500);
+        }
+
+        .translator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .translator-card {
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .language-selection {
+            background: var(--color-primary-100);
+            padding: var(--spacing-8);
+            border-bottom: 1px solid var(--color-neutral-100);
+        }
+
+        .language-selection h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-6);
+            font-weight: 600;
+        }
+
+        .language-controls {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--spacing-4);
+            align-items: end;
+        }
+
+        .language-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .language-group label {
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .language-group select {
+            padding: var(--spacing-3);
+            border: 2px solid var(--color-neutral-100);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-base);
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .language-group select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-100);
+        }
+
+        .swap-languages-btn {
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swap-languages-btn:hover {
+            background: var(--color-secondary-600);
+            transform: rotate(180deg);
+        }
+
+        .translation-interface {
+            padding: var(--spacing-8);
+        }
+
+        .formula-input-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-6);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            margin-bottom: var(--spacing-3);
+            font-size: var(--font-size-lg);
+        }
+
+        .input-group textarea {
+            padding: var(--spacing-4);
+            border: 2px solid var(--color-neutral-100);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-base);
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-100);
+        }
+
+        .input-group textarea.error {
+            border-color: var(--status-error);
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+        }
+
+        .input-group textarea.success {
+            border-color: var(--status-success);
+            box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.1);
+        }
+
+        .input-group textarea[readonly] {
+            background: var(--color-neutral-50);
+            cursor: default;
+        }
+
+        .input-help {
+            margin-top: var(--spacing-2);
+        }
+
+        .input-help small {
+            color: var(--color-neutral-500);
+            font-size: var(--font-size-sm);
+        }
+
+        .translate-controls {
+            display: flex;
+            gap: var(--spacing-4);
+            justify-content: center;
+            margin: var(--spacing-6) 0;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: var(--status-error);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            border-left: 4px solid var(--status-error);
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: var(--status-success);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            border-left: 4px solid var(--status-success);
+        }
+
+        .translation-results {
+            background: var(--color-neutral-50);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            margin-top: var(--spacing-6);
+        }
+
+        .translation-results h4 {
+            color: var(--color-neutral-800);
+            margin-bottom: var(--spacing-4);
+            font-weight: 600;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-3);
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: var(--color-neutral-500);
+            font-size: var(--font-size-sm);
+        }
+
+        .result-value {
+            font-weight: 600;
+            color: var(--color-neutral-800);
+            font-family: 'Courier New', monospace;
+        }
+
+        .copy-result-btn {
+            width: 100%;
+            justify-content: center;
+            gap: var(--spacing-2);
+        }
+
+        .examples-section {
+            background: var(--color-neutral-50);
+            padding: var(--spacing-8);
+            border-top: 1px solid var(--color-neutral-100);
+        }
+
+        .examples-section h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-6);
+            font-weight: 600;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-4);
+        }
+
+        .example-card {
+            background: white;
+            padding: var(--spacing-4);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: var(--color-primary-200);
+        }
+
+        .example-card strong {
+            color: var(--color-neutral-800);
+            display: block;
+            margin-bottom: var(--spacing-2);
+        }
+
+        .example-card code {
+            display: block;
+            background: var(--color-primary-100);
+            color: var(--color-primary);
+            padding: var(--spacing-2);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-2);
+            font-family: 'Courier New', monospace;
+            font-size: var(--font-size-sm);
+            word-break: break-all;
+        }
+
+        .example-card small {
+            color: var(--color-neutral-500);
+            font-size: var(--font-size-xs);
+        }
+
+        .info-section {
+            background: var(--color-neutral-50);
+            padding: var(--spacing-8);
+            border-top: 1px solid var(--color-neutral-100);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-6);
+        }
+
+        .info-card {
+            background: white;
+            padding: var(--spacing-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-4);
+            font-weight: 600;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            padding: var(--spacing-2) 0;
+            color: var(--color-neutral-500);
+            line-height: 1.6;
+            border-bottom: 1px solid var(--color-neutral-100);
+        }
+
+        .info-card li:last-child {
+            border-bottom: none;
+        }
+
+        .language-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-2);
+        }
+
+        .language-tag {
+            background: var(--color-primary-100);
+            color: var(--color-primary);
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            color: var(--color-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .language-controls {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-4);
+            }
+
+            .swap-languages-btn {
+                justify-self: center;
+                transform: rotate(90deg);
+            }
+
+            .swap-languages-btn:hover {
+                transform: rotate(270deg);
+            }
+
+            .translate-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: var(--font-size-3xl);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-card {
+                margin: 0 var(--spacing-4);
+            }
+
+            .language-selection,
+            .translation-interface,
+            .examples-section,
+            .info-section {
+                padding: var(--spacing-6);
+            }
+
+            .page-header h1 {
+                font-size: var(--font-size-2xl);
+            }
+        }
+    </style>
+</body>
+</html>
